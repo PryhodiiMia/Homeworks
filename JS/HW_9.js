@@ -1,82 +1,80 @@
-// 1. Створити функцію hello1(), яка при визові буде вертати текст “Привіт JavaScript”.
-const hello1 = function(){
-    console.log("Привіт JavaScript");
-}
-hello1();
-// 2. Напишіть функцію hello2(), яка при виклику буде приймати змінну name (наприклад, «Василь») і 
-// виводити рядок (в нашому випадку «Привіт, Василь»).
-const hello2 = function(name = 'Василь'){
-    console.log(`Привіт, ${name}`);
-}
-hello2();
-// 3. Напишіть функцію mul(n, m), яка приймає два аргументи і повертає добуток, суму і різницю цих аргументів. Перевірте її роботу.
-const mul = function(n, m){
-    console.log("Добуток:", n * m);
-    console.log("Сума:", n + m);
-    console.log("Різниця:", n - m);
-}
-mul(4, 5);
-// 4. Напиши функцію myAverageScore , яка у якості аргументу отримує масив з оцінками, і виводить користувачу його середній результат у наступному форматі:
-// Myaveragescore: A (якщо середня оцінка від 91 до 100)
-// My average score: B (якщо середня оцінка від 81 до 90)
-// My average score: C (якщо середня оцінка від 71 до 80)
-// My average score: D (якщо середня оцінка від 70 і менше)
-// Для перевірки:
-// console.log(myAverageScore([100, 75, 81, 96]));
-// console.log(myAverageScore([45, 63, 85, 70]));
-// console.log(myAverageScore([77, 82, 60, 58]));
-// console.log(myAverageScore([93, 99, 93, 96]));
+// Завдання 1
 
+// Напиши функцію logItems(array), яка отримує масив і використовує цикл for, який для кожного елемента масиву буде
+// виводити в консоль повідомлення в форматі [номер елемента] - [значення елемента].
+// Нумерація повинна починатися з 1. Наприклад, для першого елемента масиву ['Mango', 'Poly', 'Ajax']
+// з індексом 0 буде виведено '1 - Mango', а для індексу 2 виведе '3 - Ajax'.
 
-// 1. Напиши функцію logItems(items) для перебора і логування массива
-const logItems = function(items){
-    for (let i=0; i<items.length; i += 1){
-        console.log(items[i]);
+const logItems = function (array) {
+  for (let i = 0; i < array.length; i++) {
+    console.log(`${i + 1} - ${array[i]}`);
+  }
+};
+
+logItems(["Mango", "Poly", "Ajax"]);
+
+// Завдання 2
+
+// Напиши скрипт підрахунку вартості гравіювання прикрас. Для цього створи функцію
+// calculateEngravingPrice(message, pricePerWord) приймаючу рядок (в рядку будуть тільки слова і прогалини)
+// і ціну гравіювання одного слова, і повертає ціну гравіювання всіх слів в рядку.
+
+const calculateEngravingPrice = function (message, pricePerWord) {
+  const words = message.split(" ");
+  return words.length * pricePerWord;
+};
+
+console.log(calculateEngravingPrice("Hello World", 10));
+
+// Завдання 3
+
+// Напиши функцію findLongestWord(string), яка приймає параметром довільний рядок (в рядку будуть тільки
+// слова і прогалини) і повертає найдовше слово в цьому рядку.
+
+const findLongestWord = function (string) {
+  const words = string.split(" ");
+  let longestWord = "";
+
+  for (const word of words) {
+    if (word.length > longestWord.length) {
+      longestWord = word;
     }
-}
-logItems(['Mango', 'Kiwi', 'Poly', 'Ajax']);
-  logItems([1, 2, 3, 4, 5]);
-  logItems(['клавиатура', 'наушники', 'часы']);
-// 2. Напиши скрипт пошуку логіна
-//  - Якщо логіна немає, вивести повідомлення 'Користувач [логін] не знайдено.'
-//  - Якщо знайшли логін, вивести повідомлення 'Користувач [логін] знайдено.'
+  }
 
-const logins = ['m4ngoDoge', 'k1widab3st', 'poly1scute', 'aj4xth3m4n'];
-const loginToFind = 'aj4xth3m4n';
-let message = `Користувач ${loginToFind} не знайдено`;
-for (const login of logins) {
-    if (login === loginToFind) {
-        message = `Користувач ${loginToFind} знайдено`;
-        break;
-    }
-}
-console.log(message);
+  return longestWord;
+};
 
-// 3. Напиши функцию findSmallesNumber(numbers) пошуку самого маленького числа в масиві, при умові, що числа унікальні (не повторюються).
-const findSmallesNumber = function(numbers){
-    let smallesNumber = numbers[0];
-    for(let i=1; i<numbers.length; i++){
-        if(smallesNumber > numbers[i]){
-            smallesNumber = numbers[i];
-        }
-    }
-    return smallesNumber;
-}
-console.log(findSmallesNumber([3, 8, 12, -2, 15])); // -2
-console.log(findSmallesNumber([100, 54, 8, 12, 47])); // 8
-console.log(findSmallesNumber([7, 21, 84, 15, 4])); // 4
+console.log(findLongestWord("У далекому приголомшливому світі панувала тиша."));
 
-// 4. Напиши функцию changeCase(string) яка замінює регістр кожного символа в рядку на протилежний. Наприклад, 
-// якщо рядок «JavaScript», то на виході повинно бути «jAVAsCRIPT».
+// Завдання 4
 
-const changeCase = function(string){
+// Напиши функцію formatString(string) яка приймає рядок і форматує його якщо необхідно.
+// Якщо довжина рядка не перевищує 40 символів, функція повертає її в початковому вигляді.
+// Якщо довжина більше 40 символів, то функція обрізає рядок до 40-ка символів і додає в
+// кінець рядка три крапки '...', після чого повертає укорочену версію.
 
-}
-console.log(changeCase('qweRTY')); // QWErty
-console.log(changeCase('mAnGo')); // MaNgO
-console.log(changeCase('AjAx')); // aJaX
-// 5. Напиши функцию slugify(string) яка отримує рядок і повертає URL-slug. Заголовок статті складається тільки з букв та пропусків
+const formatString = function (string) {
+  if (string.length <= 40) {
+    return string;
+  } else {
+    return string.slice(0, 40) + "...";
+  }
+};
 
-// console.log(slugify('Top 10 benefits of React framework'));//top-10-benefits-of-react-framework
-// console.log(slugify('Azure Static Web Apps are Awesome'));
-// console.log(slugify('Technical writing tips for non-native English speakers'));
+console.log(formatString("Сонце сяє над синім морем."));
+console.log(formatString("Вечірнє небо забарвилося у відтінки помаранчевого, рожевого та фіолетового, створюючи чарівний пейзаж."));
+
+// Завдання 5
+
+// Напиши функцію checkForSpam(message), приймаючу 1 параметр message — рядок.
+// Функція перевіряє її на вміст слів spam і sale. Якщо знайшли заборонене слово, то функція
+// повертає true, якщо заборонених слів немає функція повертає false. Слова в рядку можуть бути в довільному регістрі.
+
+const checkForSpam = function (message) {
+  const lowerMessage = message.toLowerCase();
+  return lowerMessage.includes("spam") || lowerMessage.includes("sale");
+};
+
+console.log(checkForSpam("Latest technology news"));
+console.log(checkForSpam("Get best SALE offers now!"));
+console.log(checkForSpam("Beware of SPAM messages"));
